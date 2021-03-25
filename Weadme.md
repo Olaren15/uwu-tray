@@ -4,9 +4,9 @@
 
 ## FAQ
 ### which p-pwatfowms awe suppowted?
- -[x] windows
- -[ ] w-winux (wip)
- -[ ] macos (i d-don't have a mac, f-feew fwee to make a-a puww wequest to add mac suppowt)
+ - [x] windows
+ - [ ] w-winux (wip)
+ - [ ] macos (i d-don't have a mac, f-feew fwee to make a-a puww wequest to add mac suppowt)
 
 ### How do i use it?
  1. σωσ wun the executabwe found in t-the [weweases](https://github.com/Olaren15/uwu-tray/releases/latest)
