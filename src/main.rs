@@ -3,6 +3,8 @@
 use tray_item::TrayItem;
 use clipboard::{ClipboardProvider, ClipboardContext};
 use std::str;
+
+#[cfg(target_os = "linux")]
 use gtk::IconThemeExt;
 
 #[inline(always)]
