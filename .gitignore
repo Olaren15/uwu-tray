@@ -1,5 +1,4 @@
 /target
-
-.idea/
-
 *.gresource
+/assets
+.idea/
