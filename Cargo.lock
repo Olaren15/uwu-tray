@@ -682,6 +682,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "owo-colors"
+version = "1.4.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7f27ef240f1cbbcdc0774a634db63dde96db624aa010aceebccc2bb8a9a0cb67"
+
+[[package]]
 name = "padlock"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -908,6 +914,26 @@ dependencies = [
 ]
 
 [[package]]
+name = "thiserror"
+version = "1.0.24"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e0f4a65597094d4483ddaed134f409b2cb7c1beccf25201a9f73c719254fa98e"
+dependencies = [
+ "thiserror-impl",
+]
+
+[[package]]
+name = "thiserror-impl"
+version = "1.0.24"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7765189610d8241a44529806d6fd1f2e0a08734313a35d5b3a556f92b381f3c0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "tray-item"
 version = "0.4.0-alpha"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -953,12 +979,14 @@ dependencies = [
 
 [[package]]
 name = "uwuify"
-version = "0.1.0"
+version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1b0de85f9b42263b6f3e5c3206a9db77ddb0ad3d456f288efabf590c5b208639"
+checksum = "225560ddfe5dbde6d4371f934585f2375868c95d60652a7a0f8f2dcee28f6317"
 dependencies = [
  "clap",
+ "owo-colors",
  "parking_lot",
+ "thiserror",
 ]
 
 [[package]]
