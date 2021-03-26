@@ -5,7 +5,7 @@
 ## FAQ
 ### Which platforms are supported?
  - [x] Windows
- - [ ] Linux (WIP)
+ - [x] Linux
  - [ ] MacOS (I don't have a mac, feel free to make a pull request to add mac support)
 
 ### How do I use it?
