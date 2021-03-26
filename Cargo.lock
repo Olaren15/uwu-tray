@@ -942,6 +942,10 @@ name = "uwu-tray"
 version = "0.1.0"
 dependencies = [
  "clipboard",
+ "gdk",
+ "gio",
+ "glib",
+ "gtk",
  "tray-item",
  "uwuify",
  "windres",
