@@ -17,22 +17,9 @@ fn main() {
         .unwrap();
 }
 
-#[cfg(target_os="macos")]
-use std::{fs, process::Command};
-
-#[cfg(target_os="macos")]
-fn main() {
-    println!("Building uwu-tray MacOS .app package");
-    Command::new("cargo").arg("build").arg("--release").arg("--package=uwu-tray");
-
-    println!("packing uwu-tray.dmg");
-    fs::create_dir_all("assets/macos/uwu-tray.app/Contents/MacOS").expect("Cannot create [MacOS] directory for MacOS app");
-    fs::create_dir_all("assets/macos/uwu-tray.app/Contents/Resources").expect("Cannot create [Resources] directory for MacOS app");
-
-    fs::copy("target/release/uwu-tray", "assets/macos/uwu-tray.app/Contents/MacOS/uwu-tray").expect("Cannot copy uwu-tray binary into MacOS app");
-    fs::copy("res/uwu.icns",            "assets/macos/uwu-tray.app/Contents/Resources/AppIcon.icns").expect("Cannot copy icon.icns into Resources");
-    fs::copy("res/Info.plist",          "assets/macos/uwu-tray.app/Contents/Info.plist").expect("Cannot copy Info.plist into MacOS package");
-    
-    Command::new("hdiutil").arg("create").arg("assets/uwu-tray.dmg").arg("-volname").arg("uwu-tray").arg("-srcfolder").arg("assets/macos").arg("-ov");
-    println!("Package build is completed");
-}
+#[cfg(target_os = "macos")]
+// All in all binary produced is sufficient to run on macOS
+// However, if you want to bundle macOS Application, it should happend post-build (once cargo
+// generated binaries)
+// And atm only option here is to manually run `bash bundle_macos.sh`
+fn main() {}
