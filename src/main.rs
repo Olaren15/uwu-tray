@@ -12,10 +12,10 @@ fn init() {
         gtk::init().unwrap();
         let resources_bytes = include_bytes!("../res/res.gresource");
         let resource_data = glib::Bytes::from(&resources_bytes[..]);
-        let res = gio::Resource::new_from_data(&resource_data).unwrap();
+        let res = gio::Resource::new_from_data(&resource_data).expect("Failed to initialise GTK");
         gio::resources_register(&res);
         gtk::IconTheme::get_default()
-            .unwrap()
+            .expect("Failed to get default IconTheme")
             .add_resource_path("/dev/olaren/uwu-tray");
     }
 }
@@ -28,7 +28,7 @@ fn quit() {
     gtk::main_quit();
 }
 
-fn main_loop() {
+fn main_loop(mut tray: TrayItem) {
     #[cfg(target_os = "windows")]
     std::io::stdin().read_line(&mut String::new()).unwrap();
 
@@ -61,5 +61,5 @@ fn main() {
     })
     .expect("Failed to add menu item");
 
-    main_loop();
+    main_loop(tray);
 }
