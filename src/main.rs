@@ -28,6 +28,8 @@ fn quit() {
     gtk::main_quit();
 }
 
+// suppress compilation warning on windows and linux
+#[allow(unused_variables, unused_mut)]
 fn main_loop(mut tray: TrayItem) {
     #[cfg(target_os = "windows")]
     std::io::stdin().read_line(&mut String::new()).unwrap();
