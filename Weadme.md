@@ -5,8 +5,8 @@
 ## FAQ
 ### which p-pwatfowms awe suppowted?
  - [x] windows
- - [ ] w-winux (wip)
- - [ ] macos (i d-don't have a mac, f-feew fwee to make a-a puww wequest to add mac suppowt)
+ - [x] w-winux
+ - [x] macos
 
 ### How do i use it?
  1. σωσ wun the executabwe found in t-the [weweases](https://github.com/Olaren15/uwu-tray/releases/latest)
@@ -19,7 +19,7 @@
 gweat! -.- i-i used the [uwuify](https://crates.io/crates/uwuify) cwate. ( ͡o ω ͡o ) t-the weadme on [github](https://github.com/Daniel-Liu-c0deb0t/uwu) c-contains aww t-the detaiws!
 
 ### W-whewe awe the uwus???? aww i'm w-weading wn is nowmaw text!!!! ヽ（≧□≦）ノ
-i have a v-vewsion of this w-weadme [hewe](weadme.md)
+i have a v-vewsion of this w-weadme [hewe](Weadme.md)
 
 ### W-wiww thewe be updates in the futuwe?
 maybe, òωó maybe nyot, OwO who knows ¯\_(ツ)_/¯

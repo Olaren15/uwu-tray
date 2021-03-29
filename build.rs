@@ -16,3 +16,10 @@ fn main() {
         .output()
         .unwrap();
 }
+
+#[cfg(target_os = "macos")]
+// All in all binary produced is sufficient to run on macOS
+// However, if you want to bundle macOS Application, it should happend post-build (once cargo
+// generated binaries)
+// And atm only option here is to manually run `bash bundle_macos.sh`
+fn main() {}
