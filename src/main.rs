@@ -32,7 +32,7 @@ fn quit() {
 #[allow(unused_variables, unused_mut)]
 fn main_loop(mut tray: TrayItem) {
     #[cfg(target_os = "windows")]
-    std::io::stdin().read_line(&mut String::new()).unwrap();
+    loop {} // uses a lot of cpu, but it works
 
     #[cfg(target_os = "linux")]
     gtk::main();
