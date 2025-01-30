@@ -34,5 +34,35 @@ Maybe, maybe not, who knows ¯\\\_(ツ)_/¯
 
 Yes, it's licensed under the MIT license
 
+## Building
+
+### Rust
+
+This app is built with rust so make sure to have it installed on your system
+
+### Dependencies
+
+Since this app uses system APIs some dependencies need to be installed before building the app
+
+#### Windows
+
+- Windows SDK (Can be installed via Visual Studio Installer)
+
+#### Linux
+
+- TODO
+
+#### MacOs
+
+- TODO
+
+### Creating the executable
+
+Once the dependencies are installed building is a simple as running
+
+```sh
+cargo build
+```
+
 ---
 Made with ❤️ by a friend of Blåhaj
