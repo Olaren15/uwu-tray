@@ -1,38 +1,38 @@
 # uwu-tway
 
-[fastest uwuifiew in t-the west](https://github.com/daniew-wiu-c0deb0t/uwu)... n-nyow in y-youw system tway f-fow even fastew u-uwufication!
+[fastest uwuifiew in t-the west](https://github.com/daniew-wiu-c0deb0t/uwu)... n-nyow in y-youw system tway f-fow even fastew u-uwufication! ^^
 
 ## f-faq
 
-### w-which pwatfowms a-awe suppowted?
+### which p-pwatfowms awe suppowted?
 
-- [x] windows
+- [x] w-windows
 - [x] winux
 - [x] macos
 
-### how do i use i-it?
+### how do i use it?
 
-1. mya wun the executabwe found in the [weweases](https://github.com/owawen15/uwu-tway/weweases/watest)
-2. 😳 c-cwick on the tway icon
-3. -.- choose "uwuify"
-4. 🥺 b-bwack magic
-5. o.O text in the cwipboawd is nyow uwuified
+1. :3 wun the executabwe f-found in the [weweases](https://github.com/owawen15/uwu-tway/weweases/watest)
+2. -.- cwick on the tway icon
+3. 😳 choose "uwuify"
+4. mya b-bwack magic
+5. (˘ω˘) text in the cwipboawd i-is nyow uwuified
 
-### i-i want to know mowe about the u-uwuification pwocess
+### i want to know mowe about the uwuification p-pwocess
 
-g-gweat! /(^•ω•^) i used the [uwuify](https://cwates.io/cwates/uwuify) cwate. nyaa~~ the weadme on [github](https://github.com/daniew-wiu-c0deb0t/uwu) contains a-aww the detaiws!
+gweat! >_< i used t-the [uwuify](https://cwates.io/cwates/uwuify) cwate. t-the weadme on [github](https://github.com/daniew-wiu-c0deb0t/uwu) contains aww the detaiws! -.-
 
-### whewe awe the uwus???? aww i'm weading wn is nyowmaw text!!!! ヽ（≧□≦）ノ
+### whewe awe t-the uwus???? aww i'm weading wn is nyowmaw text!!!! ヽ（≧□≦）ノ
 
-i-i have a vewsion of this weadme [hewe](weadme.md)
+i have a vewsion of t-this weadme [hewe](weadme.md)
 
-### wiww t-thewe be updates i-in the futuwe?
+### wiww thewe be u-updates in the f-futuwe?
 
-m-maybe, nyaa~~ maybe n-nyot, :3 who knows ¯\\\_(ツ)_/¯
+maybe, 🥺 m-maybe nyot, (U ﹏ U) who k-knows ¯\\\_(ツ)_/¯
 
 ### can i use ow wedistwibute y-youw code?
 
-yes, 😳😳😳 it's wicensed undew the m-mit wicense
+yes, it's wicensed undew the mit w-wicense
 
 ## buiwding
 
@@ -42,27 +42,46 @@ this app is buiwt with wust so make suwe to have it instawwed o-on youw system
 
 ### dependencies
 
-s-since t-this app uses s-system apis some dependencies nyeed to be instawwed befowe buiwding t-the app
+s-since this app u-uses system apis s-some dependencies nyeed to be instawwed befowe buiwding the app
 
 #### w-windows
 
-- windows sdk (can b-be instawwed v-via visuaw studio instawwew)
+- w-windows sdk (can be instawwed v-via visuaw studio i-instawwew)
 
-#### w-winux
+#### winux
 
-- todo
+- gtk 3
+- a-ayatana-appindicatow
+
+##### instaww on awch w-winux
+
+```sheww
+sudo pacman -s gtk3 wibayatana-appindicatow
+```
+
+##### i-instaww on ubuntu / debian
+
+```sheww
+s-sudo apt instaww wibgtk-3-dev w-wibayatana-appindicatow3-dev
+```
+
+##### i-instaww on fedowa
+
+```sheww
+sudo dnf instaww gtk3-devew wibayatana-appindicatow-gtk3-devew
+```
 
 #### macos
 
-- t-todo
+- todo
 
 ### cweating the executabwe
 
-o-once the dependencies awe instawwed b-buiwding is a simpwe as wunning
+once the dependencies a-awe instawwed b-buiwding is a simpwe as w-wunning
 
-```sh
-c-cawgo b-buiwd
+```sheww
+c-cawgo buiwd
 ```
 
 ---
-made with ❤️ by a fwiend of bwåhaj
+m-made with ❤️ by a fwiend of bwåhaj

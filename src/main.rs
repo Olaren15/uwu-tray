@@ -1,16 +1,14 @@
 #![windows_subsystem = "windows"]
 
 use anyhow::{anyhow, Context, Result};
-use clipboard::{ClipboardContext, ClipboardProvider};
+use cli_clipboard::{ClipboardContext, ClipboardProvider};
 use std::string::ToString;
+use tao::event::{Event, StartCause};
+use tao::event_loop::{ControlFlow, EventLoopBuilder};
 use tray_icon::menu::{Menu, MenuEvent, MenuId, MenuItemBuilder};
 use tray_icon::{Icon, TrayIcon, TrayIconBuilder};
-use winit::application::ApplicationHandler;
-use winit::event::{StartCause, WindowEvent};
-use winit::event_loop::{ActiveEventLoop, EventLoop};
-use winit::window::WindowId;
 
-const ICON_BYTES: &[u8] = include_bytes!("../res/uwu.png");
+const ICON_BYTES: &[u8] = include_bytes!("uwu.png");
 const UWUIFY_MENU_ID: &str = "uwuify";
 const QUIT_MENU_ID: &str = "quit";
 
@@ -33,7 +31,7 @@ impl App {
         Ok(app)
     }
 
-    fn new_tray_icon(&self) -> Result<TrayIcon> {
+    fn create_tray_icon(&mut self) -> Result<()> {
         let (icon_rgba, icon_width, icon_height) = {
             let image = image::load_from_memory(ICON_BYTES)?.into_rgba8();
             let (width, height) = image.dimensions();
@@ -47,7 +45,7 @@ impl App {
             .text("uwuify".to_string())
             .enabled(true)
             .build();
-        
+
         let quit_item = MenuItemBuilder::new()
             .id(MenuId::new(QUIT_MENU_ID))
             .text("Quit".to_string())
@@ -65,55 +63,29 @@ impl App {
             .with_title("uwu-tray")
             .build()?;
 
-        Ok(tray_icon)
-    }
-}
-
-impl ApplicationHandler<MenuEvent> for App {
-    fn new_events(&mut self, _: &ActiveEventLoop, cause: StartCause) {
-        // We create the icon once the event loop is actually running
-        // to prevent issues like https://github.com/tauri-apps/tray-icon/issues/90
-        if cause == StartCause::Init {
-            #[cfg(not(target_os = "linux"))]
-            {
-                self.tray_icon = Some(self.new_tray_icon().expect("Cannot create tray icon"))
-            }
-
-            // We have to request a redraw here to have the icon actually show up.
-            // Winit only exposes a redraw method on the Window so we use core-foundation directly.
-            #[cfg(target_os = "macos")]
-            unsafe {
-                use objc2_core_foundation::{CFRunLoopGetMain, CFRunLoopWakeUp};
-
-                let rl = CFRunLoopGetMain().unwrap();
-                CFRunLoopWakeUp(&rl);
-            }
-        }
+        self.tray_icon = Some(tray_icon);
+        Ok(())
     }
 
-    fn resumed(&mut self, _: &ActiveEventLoop) {}
-
-    fn user_event(&mut self, event_loop: &ActiveEventLoop, event: MenuEvent) {
-        match event.id.0.as_str() {
+    fn handle_menu_event(&mut self, menu_event: MenuEvent) -> bool {
+        match menu_event.id.0.as_str() {
             UWUIFY_MENU_ID => {
                 self.clipboard_context
                     .get_contents()
                     .map(|contents| uwuifier::uwuify_str_sse(contents.as_str()))
                     .and_then(|uwuified| self.clipboard_context.set_contents(uwuified))
                     .expect("Cannot uwuify");
+
+                false
             }
-            QUIT_MENU_ID => {
-                event_loop.exit();
-            }
-            _ => {}
+            QUIT_MENU_ID => true,
+            _ => false,
         }
     }
-
-    fn window_event(&mut self, _: &ActiveEventLoop, _: WindowId, _: WindowEvent) {}
 }
 
 fn main() -> Result<()> {
-    let event_loop = EventLoop::<MenuEvent>::with_user_event().build()?;
+    let event_loop = EventLoopBuilder::<MenuEvent>::with_user_event().build();
 
     let menu_event_proxy = event_loop.create_proxy();
     MenuEvent::set_event_handler(Some(move |event| {
@@ -123,7 +95,32 @@ fn main() -> Result<()> {
     let _menu_channel = MenuEvent::receiver();
 
     let mut app = App::new()?;
-    event_loop.run_app(&mut app)?;
+    event_loop.run(move |event, _, control_flow| {
+        *control_flow = ControlFlow::Wait;
 
-    Ok(())
+        match event {
+            Event::NewEvents(StartCause::Init) => {
+                if let Err(_) = app.create_tray_icon() {
+                    *control_flow = ControlFlow::Exit;
+                }
+
+                // We have to request a redraw here to have the icon actually show up.
+                // Winit only exposes a redraw method on the Window so we use core-foundation directly.
+                #[cfg(target_os = "macos")]
+                unsafe {
+                    use objc2_core_foundation::{CFRunLoopGetMain, CFRunLoopWakeUp};
+
+                    let rl = CFRunLoopGetMain().unwrap();
+                    CFRunLoopWakeUp(&rl);
+                }
+            }
+
+            Event::UserEvent(event) => {
+                if app.handle_menu_event(event) {
+                    *control_flow = ControlFlow::Exit;
+                }
+            }
+            _ => {}
+        }
+    });
 }

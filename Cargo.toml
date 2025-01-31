@@ -3,15 +3,11 @@ name = "uwu-tray"
 version = "0.1.1"
 authors = ["Catherine Gilbert <catherine.gilbert15@gmail.com>"]
 edition = "2021"
-build = "build.rs"
 
 [dependencies]
-winit = "0.30.8"
-tray-icon = "0.19.2"
-clipboard = "0.5.0"
+tao = "0.31.1"
+tray-icon = { version = "0.19.2", default-features = false }
+cli-clipboard = "0.4.0"
 uwuify = "0.2.2"
 anyhow = "1.0.95"
 image = "0.25.5"
-
-[target.'cfg(windows)'.build-dependencies]
-windres = "0.2.2"

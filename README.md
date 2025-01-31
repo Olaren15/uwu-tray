@@ -50,9 +50,28 @@ Since this app uses system APIs some dependencies need to be installed before bu
 
 #### Linux
 
-- TODO
+- GTK 3
+- ayatana-appindicator
 
-#### MacOs
+##### Install on Arch linux
+
+```shell
+sudo pacman -S gtk3 libayatana-appindicator
+```
+
+##### Install on Ubuntu / Debian
+
+```shell
+sudo apt install libgtk-3-dev libayatana-appindicator3-dev
+```
+
+##### Install on Fedora
+
+```shell
+sudo dnf install gtk3-devel libayatana-appindicator-gtk3-devel
+```
+
+#### MacOS
 
 - TODO
 
@@ -60,7 +79,7 @@ Since this app uses system APIs some dependencies need to be installed before bu
 
 Once the dependencies are installed building is a simple as running
 
-```sh
+```shell
 cargo build
 ```
 
