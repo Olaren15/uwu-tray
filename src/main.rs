@@ -60,7 +60,6 @@ impl App {
             .with_tooltip("uwu-tray")
             .with_icon(icon)
             .with_menu(Box::new(menu))
-            .with_title("uwu-tray")
             .build()?;
 
         self.tray_icon = Some(tray_icon);
@@ -110,8 +109,11 @@ fn main() -> Result<()> {
                 unsafe {
                     use objc2_core_foundation::{CFRunLoopGetMain, CFRunLoopWakeUp};
 
-                    let rl = CFRunLoopGetMain().unwrap();
-                    CFRunLoopWakeUp(&rl);
+                    if let Some(run_loop) = CFRunLoopGetMain() {
+                        CFRunLoopWakeUp(&run_loop);
+                    } else {
+                        *control_flow = ControlFlow::Exit;
+                    }
                 }
             }
 

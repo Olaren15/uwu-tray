@@ -11,3 +11,6 @@ cli-clipboard = "0.4.0"
 uwuify = "0.2.2"
 anyhow = "1.0.95"
 image = "0.25.5"
+
+[target.'cfg(target_os="macos")'.dependencies]
+objc2-core-foundation = "0.3.0"
