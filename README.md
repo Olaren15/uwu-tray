@@ -8,7 +8,7 @@
 
  - [x] Windows
  - [x] Linux
- - [x] MacOS
+ - [x] MacOS (Intel only because sse is only available on x86 processors)
 
 ### How do I use it?
 
@@ -73,7 +73,11 @@ sudo dnf install gtk3-devel libayatana-appindicator-gtk3-devel
 
 #### MacOS
 
-- TODO
+- Xcode command line tools
+
+```shell
+xcode-select --install
+```
 
 ### Creating the executable
 
