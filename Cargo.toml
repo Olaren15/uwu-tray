@@ -1,6 +1,6 @@
 [package]
 name = "uwu-tray"
-version = "0.1.1"
+version = "1.0.0"
 authors = ["Catherine Gilbert <catherine.gilbert15@gmail.com>"]
 edition = "2021"
 
