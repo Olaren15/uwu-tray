@@ -1,67 +1,128 @@
 #![windows_subsystem = "windows"]
 
-use clipboard::{ClipboardContext, ClipboardProvider};
-use tray_item::TrayItem;
+use anyhow::{anyhow, Context, Result};
+use cli_clipboard::{ClipboardContext, ClipboardProvider};
+use std::string::ToString;
+use tao::event::{Event, StartCause};
+use tao::event_loop::{ControlFlow, EventLoopBuilder};
+use tray_icon::menu::{Menu, MenuEvent, MenuId, MenuItemBuilder};
+use tray_icon::{Icon, TrayIcon, TrayIconBuilder};
 
-#[cfg(target_os = "linux")]
-use gtk::IconThemeExt;
+const ICON_BYTES: &[u8] = include_bytes!("uwu.png");
+const UWUIFY_MENU_ID: &str = "uwuify";
+const QUIT_MENU_ID: &str = "quit";
 
-fn init() {
-    #[cfg(target_os = "linux")]
-    {
-        gtk::init().unwrap();
-        let resources_bytes = include_bytes!("../res/res.gresource");
-        let resource_data = glib::Bytes::from(&resources_bytes[..]);
-        let res = gio::Resource::new_from_data(&resource_data).expect("Failed to initialise GTK");
-        gio::resources_register(&res);
-        gtk::IconTheme::get_default()
-            .expect("Failed to get default IconTheme")
-            .add_resource_path("/dev/olaren/uwu-tray");
+struct App {
+    tray_icon: Option<TrayIcon>,
+    clipboard_context: ClipboardContext,
+}
+
+impl App {
+    fn new() -> Result<App> {
+        let clipboard_context = ClipboardContext::new()
+            .map_err(|err| anyhow!("{}", err))
+            .context("Cannot create clipboard context")?;
+
+        let app = App {
+            tray_icon: None,
+            clipboard_context,
+        };
+
+        Ok(app)
+    }
+
+    fn create_tray_icon(&mut self) -> Result<()> {
+        let (icon_rgba, icon_width, icon_height) = {
+            let image = image::load_from_memory(ICON_BYTES)?.into_rgba8();
+            let (width, height) = image.dimensions();
+            let rgba = image.into_raw();
+            (rgba, width, height)
+        };
+        let icon = Icon::from_rgba(icon_rgba, icon_width, icon_height)?;
+
+        let uwuify_item = MenuItemBuilder::new()
+            .id(MenuId::new(UWUIFY_MENU_ID))
+            .text("uwuify".to_string())
+            .enabled(true)
+            .build();
+
+        let quit_item = MenuItemBuilder::new()
+            .id(MenuId::new(QUIT_MENU_ID))
+            .text("Quit".to_string())
+            .enabled(true)
+            .build();
+
+        let menu = Menu::new();
+        menu.append(&uwuify_item)?;
+        menu.append(&quit_item)?;
+
+        let tray_icon = TrayIconBuilder::new()
+            .with_tooltip("uwu-tray")
+            .with_icon(icon)
+            .with_menu(Box::new(menu))
+            .build()?;
+
+        self.tray_icon = Some(tray_icon);
+        Ok(())
+    }
+
+    fn handle_menu_event(&mut self, menu_event: MenuEvent) -> bool {
+        match menu_event.id.0.as_str() {
+            UWUIFY_MENU_ID => {
+                self.clipboard_context
+                    .get_contents()
+                    .map(|contents| uwuifier::uwuify_str_sse(contents.as_str()))
+                    .and_then(|uwuified| self.clipboard_context.set_contents(uwuified))
+                    .expect("Cannot uwuify");
+
+                false
+            }
+            QUIT_MENU_ID => true,
+            _ => false,
+        }
     }
 }
 
-fn quit() {
-    #[cfg(any(target_os = "windows", target_os = "macos"))]
-    std::process::exit(0);
+fn main() -> Result<()> {
+    let event_loop = EventLoopBuilder::<MenuEvent>::with_user_event().build();
 
-    #[cfg(target_os = "linux")]
-    gtk::main_quit();
-}
+    let menu_event_proxy = event_loop.create_proxy();
+    MenuEvent::set_event_handler(Some(move |event| {
+        menu_event_proxy.send_event(event).ok();
+    }));
 
-// suppress compilation warning on windows and linux
-#[allow(unused_variables, unused_mut)]
-fn main_loop(mut tray: TrayItem) {
-    #[cfg(target_os = "windows")]
-    loop {} // uses a lot of cpu, but it works
+    let _menu_channel = MenuEvent::receiver();
 
-    #[cfg(target_os = "linux")]
-    gtk::main();
+    let mut app = App::new()?;
+    event_loop.run(move |event, _, control_flow| {
+        *control_flow = ControlFlow::Wait;
 
-    #[cfg(target_os = "macos")]
-    tray.inner_mut().display();
-}
+        match event {
+            Event::NewEvents(StartCause::Init) => {
+                if let Err(_) = app.create_tray_icon() {
+                    *control_flow = ControlFlow::Exit;
+                }
 
-fn main() {
-    init();
+                // We have to request a redraw here to have the icon actually show up.
+                // Winit only exposes a redraw method on the Window so we use core-foundation directly.
+                #[cfg(target_os = "macos")]
+                unsafe {
+                    use objc2_core_foundation::{CFRunLoopGetMain, CFRunLoopWakeUp};
 
-    let mut tray = TrayItem::new("uwu", "uwu").expect("Failed to create tray icon");
+                    if let Some(run_loop) = CFRunLoopGetMain() {
+                        CFRunLoopWakeUp(&run_loop);
+                    } else {
+                        *control_flow = ControlFlow::Exit;
+                    }
+                }
+            }
 
-    tray.add_menu_item("uwuify", || {
-        let mut clipboard: ClipboardContext =
-            ClipboardProvider::new().expect("Failed to create clipboard context");
-
-        if let Ok(contents) = clipboard.get_contents() {
-            clipboard
-                .set_contents(uwuifier::uwuify_str_sse(contents.as_str()))
-                .expect("Failed to set clipboard contents");
+            Event::UserEvent(event) => {
+                if app.handle_menu_event(event) {
+                    *control_flow = ControlFlow::Exit;
+                }
+            }
+            _ => {}
         }
-    })
-    .expect("Failed to add menu item");
-
-    tray.add_menu_item("Quit", || {
-        quit();
-    })
-    .expect("Failed to add menu item");
-
-    main_loop(tray);
+    });
 }
