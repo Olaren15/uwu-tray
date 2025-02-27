@@ -2,6 +2,8 @@
 
 [fastest uwuifier in the west](https://github.com/Daniel-Liu-c0deb0t/uwu)... now in your system tray for even faster uwufication!
 
+![Screenshot](screenshot.png)
+
 ## FAQ
 
 ### Which platforms are supported?
@@ -12,11 +14,12 @@
 
 ### How do I use it?
 
- 1. Run the executable found in the [Releases](https://github.com/Olaren15/uwu-tray/releases/latest)
- 2. Click on the tray icon
- 3. Choose "uwuify"
- 4. Black magic
- 5. Text in the clipboard is now uwuified
+1. Run the executable found in the [Releases](https://github.com/Olaren15/uwu-tray/releases/latest)
+2. Copy some text
+3. Click on the tray icon
+4. Choose "uwuify"
+5. Black magic
+6. Text in the clipboard is now uwuified
 
 ### I want to know more about the uwuification process
 

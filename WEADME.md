@@ -1,52 +1,55 @@
 # uwu-tway
 
-[fastest uwuifiew in t-the west](https://github.com/daniew-wiu-c0deb0t/uwu)... n-nyow in y-youw system tway f-fow even fastew u-uwufication! (˘ω˘)
+[fastest uwuifiew in t-the west](https://github.com/daniew-wiu-c0deb0t/uwu)... n-nyow in y-youw system tway f-fow even fastew u-uwufication!
+
+![scweenshot](scweenshot.png)
 
 ## f-faq
 
-### which p-pwatfowms awe suppowted?
+### w-which pwatfowms a-awe suppowted?
 
-- [x] w-windows
+- [x] windows
 - [x] winux
-- [x] macos (intew onwy because sse is onwy avaiwabwe on x-x86 pwocessows)
+- [x] macos (intew onwy because s-sse is onwy avaiwabwe on x86 pwocessows)
 
-### how do i use it?
+### h-how do i use it?
 
-1. >_< wun t-the executabwe found in the [weweases](https://github.com/owawen15/uwu-tway/weweases/watest)
-2. -.- c-cwick on the tway icon
-3. 🥺 choose "uwuify"
-4. (U ﹏ U) bwack magic
-5. >w< text in the cwipboawd i-is nyow uwuified
+1. (U ﹏ U) wun the e-executabwe found in the [weweases](https://github.com/owawen15/uwu-tway/weweases/watest)
+2. >w< copy some text
+3. mya cwick on the tway i-icon
+4. >w< choose "uwuify"
+5. nyaa~~ bwack magic
+6. (✿oωo) t-text in the cwipboawd i-is nyow uwuified
 
-### i want t-to know mowe a-about the uwuification pwocess
+### i want to know mowe about the uwuification pwocess
 
-gweat! mya i used the [uwuify](https://cwates.io/cwates/uwuify) cwate. >w< the weadme on [github](https://github.com/daniew-wiu-c0deb0t/uwu) c-contains aww the detaiws! nyaa~~
+gweat! ʘwʘ i used t-the [uwuify](https://cwates.io/cwates/uwuify) cwate. (ˆ ﻌ ˆ)♡ the weadme on [github](https://github.com/daniew-wiu-c0deb0t/uwu) contains aww the detaiws!
 
-### whewe awe the uwus???? aww i'm weading wn is n-nowmaw text!!!! (✿oωo) ヽ（≧□≦）ノ
+### w-whewe awe the uwus???? a-aww i'm weading w-wn is nyowmaw t-text!!!! ヽ（≧□≦）ノ
 
-i have a v-vewsion of this w-weadme [hewe](weadme.md)
+i-i have a vewsion of this weadme [hewe](weadme.md)
 
-### wiww t-thewe be updates i-in the futuwe?
+### wiww t-thewe be updates in the futuwe?
 
-maybe, ʘwʘ maybe nyot, who knows ¯\\\_(ツ)_/¯
+maybe, 😳😳😳 maybe n-nyot, :3 who knows ¯\\\_(ツ)_/¯
 
-### c-can i use ow wedistwibute youw code?
+### can i use ow wedistwibute youw code?
 
-yes, (ˆ ﻌ ˆ)♡ i-it's wicensed undew the mit wicense
+yes, it's wicensed undew the mit w-wicense
 
 ## buiwding
 
 ### wust
 
-this app is buiwt with wust so make s-suwe to have it instawwed on youw s-system
+t-this app is b-buiwt with wust s-so make suwe to have it instawwed on youw system
 
-### d-dependencies
+### dependencies
 
-since t-this app uses system apis some dependencies nyeed to be instawwed b-befowe buiwding t-the app
+s-since t-this app uses system apis some dependencies n-nyeed t-to be instawwed befowe buiwding t-the app
 
 #### windows
 
-- windows s-sdk (can b-be instawwed via visuaw studio instawwew)
+- windows s-sdk (can be instawwed via visuaw studio instawwew)
 
 #### w-winux
 
@@ -56,36 +59,36 @@ since t-this app uses system apis some dependencies nyeed to be instawwed b-befo
 ##### i-instaww on awch winux
 
 ```sheww
-sudo p-pacman -s gtk3 wibayatana-appindicatow
+s-sudo pacman -s g-gtk3 wibayatana-appindicatow
 ```
 
-##### i-instaww on ubuntu / debian
+##### instaww on ubuntu / debian
 
 ```sheww
-s-sudo apt i-instaww wibgtk-3-dev wibayatana-appindicatow3-dev
+sudo apt instaww wibgtk-3-dev wibayatana-appindicatow3-dev
 ```
 
 ##### instaww on fedowa
 
 ```sheww
-sudo dnf instaww gtk3-devew wibayatana-appindicatow-gtk3-devew
+s-sudo dnf instaww g-gtk3-devew wibayatana-appindicatow-gtk3-devew
 ```
 
 #### macos
 
-- xcode c-command wine t-toows
+- x-xcode command w-wine toows
 
 ```sheww
-xcode-sewect --instaww
+x-xcode-sewect --instaww
 ```
 
-### c-cweating the executabwe
+### cweating the executabwe
 
-o-once the d-dependencies awe instawwed buiwding is a simpwe as wunning
+once the dependencies a-awe instawwed buiwding is a simpwe as wunning
 
 ```sheww
-c-cawgo buiwd
+cawgo buiwd
 ```
 
 ---
-made with ❤️ by a fwiend of bwåhaj
+m-made with ❤️ by a fwiend o-of bwåhaj
